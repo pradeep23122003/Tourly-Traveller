@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Travel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('./assets/images/hero-banner.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: -60px;
+            top: 0;
+            height: 100%;
+            width: 60px;
+            background-color: #007bff;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: left 0.3s;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .booking-form {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar-toggle {
+            display: block;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .login-section {
+            display: none;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .login-form button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .login-form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Tourly</h2>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Flights</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hotels</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Holidays</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="show-login">Login</a>
+            </li>
+        </ul>
+        <div class="sidebar-toggle" id="sidebarToggle">&#9776;</div>
+    </div>
+
+    <div class="container">
+        <h1>Book Your Travel</h1>
+
+        <!-- Booking Section -->
+        <div class="booking-section">
+            <div class="booking-form">
+                <form action="confirmation-page.html" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required><br>
+
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" required><br>
+
+                    <label for="destination">Destination:</label>
+                    <input type="text" id="destination" name="destination" required><br>
+
+                    <label for="departure-date">Departure Date:</label>
+                    <input type="date" id="departure-date" name="departure-date" required><br>
+
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Login Section -->
+        <div class="login-section">
+            <div class="login-form">
+                <form action="login.php" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required><br>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required><br>
+
+                    <button type="submit">Login</button>
+                    <button type="submit">SignUp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bookingSection = document.querySelector('.booking-section');
+        const loginSection = document.querySelector('.login-section');
+        const showLoginLink = document.getElementById('show-login');
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+
+        showLoginLink.addEventListener('click', () => {
+            bookingSection.style.display = 'none';
+            loginSection.style.display = 'block';
+        });
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>
